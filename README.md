@@ -4,7 +4,7 @@
 
 ### ULTRA
 
-#### Modern Streaming React Framework
+#### Modern Streaming SSR React Framework in Deno
 
 [ultrajs.dev](https://ultrajs.dev)
 
@@ -17,7 +17,7 @@
 
 ---
 
-**Ultra** is a web framework that leans hard into your browser's native
+**Ultra** is a web-app framework that leans hard into your browser's native
 features. Embrace the future of **ES Modules**, **Import Maps**, and **Web
 Streams**. All while supporting some of the non-standards that many normal
 people love for some reason (**JSX** and **TypeScript**).
@@ -35,43 +35,38 @@ It's driven by the following hot-takes:
 
 ---
 
-### 👯 Community
-
-We now have a [Discord](https://discord.gg/9BMpE96CZt). Come say HI.
-
----
-
-### 🙌 next
-
-We are working towards the next milestone.
-[v1.0.0](https://github.com/exhibitionist-digital/ultra/milestone/2) 🗿
+🏄 If you want to dive right in,
+[create-ultra-app](https://github.com/exhibitionist-digital/create-ultra-app) is
+the easiest way. Less words, more ESM.
 
 ---
 
-### 🚧 v0.8.0
+### ‼️ v1.0.0 @__@
 
-Heaps of updates in v0.8.0! Because of these new features. Please ensure you are
-using at least Deno `v1.20.3`
+- Total overhaul of transforms, migration to brand new
+  [@swc/wasm-web](https://swc.rs/docs/usage/wasm)!
+- Esbuild removed!
+- Unfettered support for React 18!
+- Tests!
+- Example integration with [@mdx-js/mdx](https://mdxjs.com)!
+- Improvements to API routes!
+- Updated [docs](https://ultrajs.dev/docs)!
+- New [website](https://ultrajs.dev)!
 
-- **Vendored dependencies!** We have a script that can take your CDN deps and
-  make them local.
-- **API routes!** (Thanks @Industrial)
-- Option to **disable streaming** 😱. Passing the env `disableStreaming=1` will
-  force Ultra to use a custom `renderToString` equivalent - returning a **fully
-  resolved, suspense compatible**, html page! (BETA)
-- **Websocket refresh** in dev mode. Ultra will restart on local changes.
-- Full support for
-  [react@18](https://github.com/reactjs/rfcs/blob/react-18/text/0000-react-18.md):
-  There were some updates to how
-  [streams are handled](https://github.com/reactwg/react-18/discussions/122) in
-  the latest `rc`.
-- Tighter integration with
-  [Deno config file](https://deno.land/manual/getting_started/configuration_file).
-  Specifiying your `importMap` in `deno.json` is **required**
-- Removal of `makefile` in favour of
-  [deno task](https://deno.com/blog/v1.20#new-subcommand-deno-task)
-- **Legacy**: We also export an [Oak](https://deno.land/x/oak) compatible
-  `ultraHandler` for support inside of an pre-existing Oak project
+Migration notes:
+
+Previous v0.8.0 (and earlier) projects need to update the server import. We
+removed the `mod.ts` file for simplicity.
+
+```javascript
+import ultra from "https://deno.land/x/ultra/server.ts";
+```
+
+---
+
+### Community
+
+We now have a [Discord](https://discord.gg/XDC5WxGHb2). Come say HI.
 
 ---
 
@@ -112,6 +107,13 @@ Here some things we are interested in for the future of JS and/or Ultra:
 [docs-badge]: https://img.shields.io/github/v/release/exhibitionist-digital/ultra?label=Docs&logo=deno&color=000000&
 [docs]: https://ultrajs.dev/docs
 [discord-badge]: https://img.shields.io/discord/956480805088153620?logo=discord&label=Discord&color=000000&&logoColor=ffffff
-[discord]: https://discord.gg/9BMpE96CZt
+[discord]: https://discord.gg/XDC5WxGHb2
 [actions-badge]: https://img.shields.io/github/workflow/status/exhibitionist-digital/ultra/fmt%20+%20lint?color=000000&logo=github&label=Tests
 [actions]: https://github.com/exhibitionist-digital/ultra/actions
+
+---
+
+### Contributions
+
+The **Ultra** community welcomes outside contributions. See the
+[Contributor Guidelines](./CONTRIBUTING.md) for details.

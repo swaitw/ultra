@@ -11,8 +11,18 @@
     }
   },
 
-  // This will install the vscode-deno extension
-  "extensions": ["denoland.vscode-deno"],
+  "extensions": [
+    "denoland.vscode-deno",
+    "GitHub.vscode-pull-request-github"
+  ],
 
-  "remoteUser": "vscode"
+  "runArgs": [
+    "--network",
+    "host"
+  ],
+
+  "remoteUser": "vscode",
+  "features": {
+    "docker-from-docker": "latest"
+  }
 }

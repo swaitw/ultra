@@ -1,22 +1,17 @@
-import { crypto, extname } from "./deps.ts";
+import { crypto, format, parse, resolve, toFileUrl } from "./deps.ts";
+import { apiDirectory } from "./env.ts";
 
-export const jsify = (file: string) => {
-  return file.replace(extname(file), ".js");
+export type ValidExtensions = ".js" | ".jsx" | ".ts" | ".tsx";
+
+export const replaceFileExt = (
+  file: string,
+  extension: ValidExtensions,
+): string => {
+  file = format({ ...parse(file), base: "", ext: extension });
+  return file.replaceAll("\\", "/");
 };
 
-export const tsify = (file: string) => {
-  return file.replace(extname(file), ".ts");
-};
-
-export const jsxify = (file: string) => {
-  return file.replace(extname(file), ".jsx");
-};
-
-export const tsxify = (file: string) => {
-  return file.replace(extname(file), ".tsx");
-};
-
-export const isValidURL = (url: string) => {
+export const isValidUrl = (url: string): URL | false => {
   try {
     return new URL(url);
   } catch (_e) {
@@ -24,7 +19,7 @@ export const isValidURL = (url: string) => {
   }
 };
 
-export const hashFile = (url: string) => {
+export const hashFile = (url: string): string => {
   // strip query params from hashing
   url = url.split("?")[0];
   const msgUint8 = new TextEncoder().encode(url);
@@ -36,6 +31,26 @@ export const hashFile = (url: string) => {
   return hashHex;
 };
 
-export function stripTrailingSlash(url: string) {
+export const stripTrailingSlash = (url: string): string => {
   return url.endsWith("/") ? url.slice(0, -1) : url;
-}
+};
+
+export const resolveFileUrl = (from: string, to: string) => {
+  return new URL(toFileUrl(resolve(from, to)).toString());
+};
+
+export const isRemoteSource = (value: string): boolean => {
+  return value.startsWith("https://") ||
+    value.startsWith("http://");
+};
+
+export const isVendorSource = (
+  value: string,
+  vendorDirectory: string,
+): boolean => {
+  return value.includes(`.ultra/${vendorDirectory}`);
+};
+
+export const isApiRoute = (value: string): boolean => {
+  return value.includes(apiDirectory);
+};

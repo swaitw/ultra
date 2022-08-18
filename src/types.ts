@@ -1,8 +1,10 @@
-import { TransformOptions as EsBuildTransformOptions } from "https://deno.land/x/esbuild@v0.12.24/mod.js";
-
 export type ImportMap = { imports: Record<string, string> };
 
 export type Navigate = (to: string, opts?: { replace?: boolean }) => void;
+
+export type Config = {
+  importMap?: string;
+};
 
 type Context = {
   request: Request;
@@ -12,18 +14,12 @@ type Context = {
   };
 };
 
-export type OakOptions = {
-  env?: Record<string, string>;
-  context: Context;
-};
-
 export type TransformOptions = {
   source: string;
+  sourceUrl: URL;
   importMap: ImportMap;
-  root: string;
-  loader?: EsBuildTransformOptions["loader"];
-  cacheBuster?: number;
-  env?: Record<string, unknown>;
+  minify?: boolean;
+  relativePrefix?: string;
 };
 
 export type Ultraloader = {
@@ -31,7 +27,6 @@ export type Ultraloader = {
 };
 
 export type RenderOptions = {
-  root: string;
   importMap: ImportMap;
   url: URL;
   lang: string;
